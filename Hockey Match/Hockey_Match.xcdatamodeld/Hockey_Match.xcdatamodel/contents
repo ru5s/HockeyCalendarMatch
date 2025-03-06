@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MatchesHockey" representedClassName="MatchesHockey" syncable="YES" codeGenerationType="class">
+        <attribute name="dateMatch" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="idMatch" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="locationMatch" optional="YES" attributeType="String"/>
+        <attribute name="playedGameMatch" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="playoffStageMatch" optional="YES" attributeType="String"/>
+        <attribute name="rewardMatch" optional="YES" attributeType="String"/>
+        <attribute name="teamOneScoreMatch" optional="YES" attributeType="String"/>
+        <attribute name="teamTwoScoreMatch" optional="YES" attributeType="String"/>
+        <relationship name="teamOneRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamHockey" inverseName="teamOneRelationship" inverseEntity="TeamHockey"/>
+        <relationship name="teamTwoRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamHockey" inverseName="teamTwoRelationship" inverseEntity="TeamHockey"/>
+    </entity>
+    <entity name="NotesHockey" representedClassName="NotesHockey" syncable="YES" codeGenerationType="class">
+        <attribute name="dateNotes" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="idNotes" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="textNotes" optional="YES" attributeType="String"/>
+        <relationship name="teamNotesRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamHockey" inverseName="teamNotesRelationship" inverseEntity="TeamHockey"/>
+    </entity>
+    <entity name="PlayersHockey" representedClassName="PlayersHockey" syncable="YES" codeGenerationType="class">
+        <attribute name="idPlayer" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="namePlayer" optional="YES" attributeType="String"/>
+        <attribute name="photoPlayer" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="positionPlayer" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teamNumberPlayer" optional="YES" attributeType="String"/>
+        <attribute name="yearsOldPlayer" optional="YES" attributeType="String"/>
+        <relationship name="teamPlayerRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamHockey" inverseName="teamPlayerRelationship" inverseEntity="TeamHockey"/>
+    </entity>
+    <entity name="TeamHockey" representedClassName="TeamHockey" syncable="YES" codeGenerationType="class">
+        <attribute name="idTeam" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="logoTeam" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="loseTeam" optional="YES" attributeType="String"/>
+        <attribute name="nameTeam" optional="YES" attributeType="String"/>
+        <attribute name="totalMatchesTeam" optional="YES" attributeType="String"/>
+        <attribute name="winTeam" optional="YES" attributeType="String"/>
+        <relationship name="teamNotesRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NotesHockey" inverseName="teamNotesRelationship" inverseEntity="NotesHockey"/>
+        <relationship name="teamOneRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchesHockey" inverseName="teamOneRelationship" inverseEntity="MatchesHockey"/>
+        <relationship name="teamPlayerRelationship" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlayersHockey" inverseName="teamPlayerRelationship" inverseEntity="PlayersHockey"/>
+        <relationship name="teamTwoRelationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchesHockey" inverseName="teamTwoRelationship" inverseEntity="MatchesHockey"/>
+    </entity>
+</model>
